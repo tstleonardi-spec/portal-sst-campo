@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10191f">
+  <title>Campo — Portal SST JC Ramos · PROD TEST</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./field.css">
+</head>
+<body>
+<main>
+  <header class="hero">
+    <div>
+      <span class="eyebrow">JC RAMOS · PORTAL SST</span>
+      <h1>Registro de campo</h1>
+      <p>Capture agora. O Portal recebe depois, com revisão humana.</p>
+    </div>
+    <span class="environment-badge">PROD TEST</span>
+  </header>
+
+  <section aria-labelledby="access-title" class="access-card">
+    <div class="section-heading">
+      <div><span class="section-kicker">ACESSO</span><h2 id="access-title">Seu acesso</h2></div>
+      <span id="connection" class="status-badge">Verificando conexão</span>
+    </div>
+    <p id="user">Entre com sua conta Google autorizada.</p>
+    <div class="actions">
+      <button id="login" disabled>Entrar com Google</button>
+      <button id="logout" disabled>Sair</button>
+    </div>
+    <p id="auth-status" role="status">Aguardando configuração do gateway de produção.</p>
+  </section>
+
+  <section aria-labelledby="context-title" class="context-card">
+    <div class="section-heading">
+      <div><span class="section-kicker">PASSO 1</span><h2 id="context-title">Contexto do registro</h2></div>
+      <span class="status-badge valid">PROD TEST</span>
+    </div>
+    <p id="catalog-status" class="catalog-status">Cebrace · Cebrace Jacareí. Nenhuma Atividade será criada automaticamente.</p>
+    <div class="context-grid">
+      <div>
+        <label for="client">Cliente <span aria-hidden="true">*</span></label>
+        <select id="client" required><option>Cebrace</option></select>
+      </div>
+      <div>
+        <label for="unit">Unidade <span aria-hidden="true">*</span></label>
+        <select id="unit" required><option>Cebrace Jacareí</option></select>
+      </div>
+      <div class="context-wide">
+        <label for="location">Local / setor <span aria-hidden="true">*</span></label>
+        <select id="location" required></select>
+        <div id="location-other" hidden><label for="location-free">Qual local / setor?</label><input id="location-free" maxlength="200" aria-describedby="capture-status"></div>
+      </div>
+      <div class="context-wide">
+        <label for="activity">Atividade</label>
+        <select id="activity"><option value="">Ainda não associada</option></select>
+        <div id="activity-other"><label for="activity-free">Descrição da atividade <span aria-hidden="true">*</span></label><input id="activity-free" maxlength="200" placeholder="Ex.: manutenção de estrutura metálica" aria-describedby="capture-status"></div>
+      </div>
+    </div>
+    <p id="context-status" role="status" class="feedback">Confira o contexto antes de enviar.</p>
+  </section>
+
+  <section aria-labelledby="capture-title" class="capture-card">
+    <div class="section-heading">
+      <div><span class="section-kicker">PASSO 2</span><h2 id="capture-title">Registrar evidência</h2></div>
+      <span id="capture-badge" class="status-badge">Aguardando contexto</span>
+    </div>
+    <ol id="timeline" class="timeline" aria-label="Andamento do registro">
+      <li id="timeline-context" class="current"><span>1</span><div><strong>Contexto</strong><small>Cliente, local e atividade</small></div></li>
+      <li id="timeline-evidence"><span>2</span><div><strong>Evidência</strong><small>Texto, ocorrência ou foto</small></div></li>
+      <li id="timeline-queue"><span>3</span><div><strong>Diário</strong><small>Preservado no Drive</small></div></li>
+    </ol>
+    <form id="capture" novalidate>
+      <label for="kind">Tipo de registro <span aria-hidden="true">*</span></label>
+      <select id="kind">
+        <option value="PHOTO_REPORT">Foto + relato</option>
+        <option value="PHOTO">Foto</option>
+        <option value="REPORT">Relato</option>
+      </select>
+      <label for="stage">Etapa <span aria-hidden="true">*</span></label>
+      <select id="stage"></select>
+      <div id="stage-other" hidden><label for="stage-free">Qual etapa?</label><input id="stage-free" maxlength="200" aria-describedby="capture-status"></div>
+      <div id="photo-section">
+        <p class="field-label">Foto original</p>
+        <div class="actions photo-actions">
+          <button id="camera-button" type="button">Tirar foto</button>
+          <button id="gallery-button" type="button">Escolher da galeria</button>
+        </div>
+        <input id="camera" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" hidden>
+        <input id="gallery" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <p id="photo-name">Uma foto JPEG, PNG ou WEBP, até 10 MiB.</p>
+        <img id="preview" hidden alt="Prévia da foto original" width="320" height="200">
+        <button id="remove-photo" type="button" disabled>Retirar foto</button>
+      </div>
+      <label for="text">Descrição / relato</label>
+      <textarea id="text" rows="5" maxlength="5000" placeholder="O que está acontecendo?" aria-describedby="capture-status"></textarea>
+      <p id="capture-status" class="feedback" role="status"></p>
+      <button id="send" type="submit" class="primary" disabled>ENVIAR REGISTRO</button>
+    </form>
+  </section>
+
+  <section aria-labelledby="diary-title" class="queue-card">
+    <div class="section-heading">
+      <div><span class="section-kicker">PASSO 3</span><h2 id="diary-title">Diário de campo</h2></div>
+      <span id="queue-count" class="status-badge">0 registros</span>
+    </div>
+    <p>Registros deste aparelho e da sua conta. “Enviado” confirma preservação no Drive; não confirma importação no Portal.</p>
+    <label for="day">Período</label>
+    <select id="day"><option value="TODAY">Hoje</option><option value="RECENT">Recentes</option></select>
+    <ol id="diary" class="queue-list"><li>Entre para consultar seus registros.</li></ol>
+    <p id="diary-status" role="status" class="feedback"></p>
+  </section>
+
+  <footer>Ambiente temporário PROD TEST. Sem internet, o envio fica indisponível. Use um aparelho protegido. Horários de São Paulo.</footer>
+</main>
+<script type="module" src="./production-app.mjs"></script>
+</body>
+</html>
