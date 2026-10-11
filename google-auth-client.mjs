@@ -32,3 +32,4 @@ export function createFieldGoogleClient({ clientId,gatewayUrl,origin,google,tran
     signOut:async()=>{try{if(session)await call('AUTH_LOGOUT',{session});}finally{session=null;user=null;}}
   };
 }
+

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#10191f">
-  <title>Campo — Portal SST JC Ramos</title>
+  <title>Campo — Portal SST JC Ramos · OPERACIONAL</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="stylesheet" href="./field.css">
 </head>
@@ -16,44 +16,49 @@
       <h1>Registro de campo</h1>
       <p>Capture agora. O Portal recebe depois, com revisão humana.</p>
     </div>
-    <span class="environment-badge">HOMOLOGAÇÃO</span>
+    <span class="environment-badge">OPERACIONAL</span>
   </header>
 
   <section aria-labelledby="access-title" class="access-card">
     <div class="section-heading">
       <div><span class="section-kicker">ACESSO</span><h2 id="access-title">Seu acesso</h2></div>
-      <span id="network-badge" class="status-badge">Verificando conexão</span>
+      <span id="connection" class="status-badge">Verificando conexão</span>
     </div>
-    <p id="user">Não autenticado. Rascunhos podem ser guardados neste aparelho.</p>
+    <p id="user">Entre com sua conta Google autorizada.</p>
     <div class="actions">
       <button id="login" disabled>Entrar com Google</button>
       <button id="logout" disabled>Sair</button>
     </div>
-    <p id="auth-status" role="status">Aguardando configuração humana do gateway.</p>
+    <p id="auth-status" role="status">Aguardando configuração do gateway de produção.</p>
   </section>
 
   <section aria-labelledby="context-title" class="context-card">
     <div class="section-heading">
-      <div><span class="section-kicker">PASSO 1</span><h2 id="context-title">Contexto da atividade</h2></div>
-      <span id="catalog-badge" class="status-badge">Catálogo fictício</span>
+      <div><span class="section-kicker">PASSO 1</span><h2 id="context-title">Contexto do registro</h2></div>
+      <span class="status-badge valid">OPERACIONAL</span>
     </div>
-    <p id="catalog-status" class="catalog-status">Carregando catálogo local de homologação…</p>
+    <p id="catalog-status" class="catalog-status">Cebrace · Cebrace Jacareí. Nenhuma Atividade será criada automaticamente.</p>
     <div class="context-grid">
       <div>
         <label for="client">Cliente <span aria-hidden="true">*</span></label>
-        <select id="client" required aria-describedby="context-help"></select>
+        <select id="client" required><option>Cebrace</option></select>
       </div>
       <div>
-        <label for="location">Local <span aria-hidden="true">*</span></label>
-        <select id="location" required aria-describedby="context-help" disabled></select>
+        <label for="unit">Unidade <span aria-hidden="true">*</span></label>
+        <select id="unit" required><option>Cebrace Jacareí</option></select>
       </div>
       <div class="context-wide">
-        <label for="activity">OS / atividade <span aria-hidden="true">*</span></label>
-        <select id="activity" required aria-describedby="context-help" disabled></select>
+        <label for="location">Local / setor <span aria-hidden="true">*</span></label>
+        <select id="location" required></select>
+        <div id="location-other" hidden><label for="location-free">Qual local / setor?</label><input id="location-free" maxlength="200" aria-describedby="capture-status"></div>
+      </div>
+      <div class="context-wide">
+        <label for="activity">Atividade</label>
+        <select id="activity"><option value="">Ainda não associada</option></select>
+        <div id="activity-other"><label for="activity-free">Descrição da atividade <span aria-hidden="true">*</span></label><input id="activity-free" maxlength="200" placeholder="Ex.: manutenção de estrutura metálica" aria-describedby="capture-status"></div>
       </div>
     </div>
-    <p id="context-help">Escolha os três itens fictícios para liberar o registro da evidência.</p>
-    <p id="context-status" role="status" class="feedback">Selecione cliente, local e OS para começar.</p>
+    <p id="context-status" role="status" class="feedback">Confira o contexto antes de enviar.</p>
   </section>
 
   <section aria-labelledby="capture-title" class="capture-card">
@@ -62,57 +67,53 @@
       <span id="capture-badge" class="status-badge">Aguardando contexto</span>
     </div>
     <ol id="timeline" class="timeline" aria-label="Andamento do registro">
-      <li id="timeline-context" class="current"><span>1</span><div><strong>Contexto</strong><small>Cliente, local e OS</small></div></li>
+      <li id="timeline-context" class="current"><span>1</span><div><strong>Contexto</strong><small>Cliente, local e atividade</small></div></li>
       <li id="timeline-evidence"><span>2</span><div><strong>Evidência</strong><small>Texto, ocorrência ou foto</small></div></li>
-      <li id="timeline-queue"><span>3</span><div><strong>Fila local</strong><small>Guardado neste aparelho</small></div></li>
+      <li id="timeline-queue"><span>3</span><div><strong>Diário</strong><small>Preservado no Drive</small></div></li>
     </ol>
     <form id="capture" novalidate>
-      <label for="kind">Tipo de registro</label>
-      <select id="kind" disabled>
-        <option value="NATURAL_LANGUAGE_COMMAND">Registrar observação</option>
-        <option value="OBSERVATION">Observação</option>
-        <option value="OCCURRENCE">Ocorrência</option>
-        <option value="ARRIVAL">Registrar chegada</option>
-        <option value="TOOL_USAGE">Ferramenta utilizada</option>
-        <option value="START_ACTIVITY">Solicitar início</option>
-        <option value="PAUSE_ACTIVITY">Solicitar pausa</option>
-        <option value="RESUME_ACTIVITY">Solicitar retomada</option>
-        <option value="COMPLETE_ACTIVITY">Solicitar conclusão</option>
+      <label for="kind">Tipo de registro <span aria-hidden="true">*</span></label>
+      <select id="kind">
+        <option value="PHOTO_REPORT">Foto + relato</option>
+        <option value="PHOTO">Foto</option>
+        <option value="REPORT">Relato</option>
       </select>
-      <label for="text">O que aconteceu?</label>
-      <textarea id="text" class="resize-none" rows="5" maxlength="5000" aria-describedby="text-help capture-status" disabled></textarea>
-      <p id="text-help">Ex.: “Foi necessário usar esmerilhadeira.” Não informe senhas ou tokens.</p>
-      <label for="stage">Etapa da foto (opcional)</label>
-      <input id="stage" maxlength="200" aria-describedby="stage-help" disabled>
-      <p id="stage-help">Use um nome curto da etapa. Dúvidas ficam para revisão humana.</p>
-      <p class="field-label">Foto (opcional)</p>
-      <div class="actions photo-actions">
-        <button id="camera-button" type="button" disabled>Tirar foto</button>
-        <button id="gallery-button" type="button" disabled>Escolher da galeria</button>
+      <label for="stage">Etapa <span aria-hidden="true">*</span></label>
+      <select id="stage"></select>
+      <div id="stage-other" hidden><label for="stage-free">Qual etapa?</label><input id="stage-free" maxlength="200" aria-describedby="capture-status"></div>
+      <div id="photo-section">
+        <p class="field-label">Foto original</p>
+        <div class="actions photo-actions">
+          <button id="camera-button" type="button">Tirar foto</button>
+          <button id="gallery-button" type="button">Escolher da galeria</button>
+        </div>
+        <input id="camera" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" hidden>
+        <input id="gallery" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+        <p id="photo-name">Uma foto JPEG, PNG ou WEBP, até 10 MiB.</p>
+        <img id="preview" hidden alt="Prévia da foto original" width="320" height="200">
+        <button id="remove-photo" type="button" disabled>Retirar foto</button>
       </div>
-      <input id="photo" type="file" accept="image/jpeg,image/png,image/webp" capture="environment" hidden aria-label="Foto da câmera">
-      <input id="gallery" type="file" accept="image/jpeg,image/png,image/webp" hidden aria-label="Foto da galeria">
-      <p id="photo-help">Uma foto JPEG, PNG ou WEBP, até 10 MiB. A origem informada não comprova data, local ou autenticidade.</p>
-      <img id="photo-preview" hidden alt="Prévia da foto selecionada" width="320" height="200">
-      <p id="photo-name">Nenhuma foto selecionada.</p>
-      <button id="remove-photo" type="button" disabled>Retirar foto do rascunho</button>
-      <p id="capture-status" role="status" class="feedback">Rascunho neste aparelho.</p>
-      <button id="save" type="submit" class="primary" disabled>Guardar na fila local</button>
+      <label for="text">Descrição / relato</label>
+      <textarea id="text" rows="5" maxlength="5000" placeholder="O que está acontecendo?" aria-describedby="capture-status"></textarea>
+      <p id="capture-status" class="feedback" role="status"></p>
+      <button id="send" type="submit" class="primary" disabled>ENVIAR REGISTRO</button>
     </form>
   </section>
 
-  <section aria-labelledby="queue-title" class="queue-card">
+  <section aria-labelledby="diary-title" class="queue-card">
     <div class="section-heading">
-      <div><span class="section-kicker">PASSO 3</span><h2 id="queue-title">Fila deste aparelho</h2></div>
-      <span id="queue-count" class="status-badge">0 pendências</span>
+      <div><span class="section-kicker">PASSO 3</span><h2 id="diary-title">Diário de campo</h2></div>
+      <span id="queue-count" class="status-badge">0 registros</span>
     </div>
-    <p>“Recebido” significa que chegou à Inbox; ainda não significa registro no Portal. Não apague dados do navegador antes da conferência.</p>
-    <ol id="queue" class="queue-list"><li>Carregando fila local…</li></ol>
-    <p id="queue-status" role="status" class="feedback"></p>
+    <p>Registros deste aparelho e da sua conta. “Enviado” confirma preservação no Drive; não confirma importação no Portal.</p>
+    <label for="day">Período</label>
+    <select id="day"><option value="TODAY">Hoje</option><option value="RECENT">Recentes</option></select>
+    <ol id="diary" class="queue-list"><li>Entre para consultar seus registros.</li></ol>
+    <p id="diary-status" role="status" class="feedback"></p>
   </section>
 
-  <footer>Horários exibidos em America/Sao_Paulo. Use um aparelho protegido; esta fila contém registros e fotos do trabalho.</footer>
+  <footer>Ambiente temporário OPERACIONAL. Sem internet, o envio fica indisponível. Use um aparelho protegido. Horários de São Paulo.</footer>
 </main>
-<script type="module" src="./app.mjs"></script>
+<script type="module" src="./production-app.mjs"></script>
 </body>
 </html>

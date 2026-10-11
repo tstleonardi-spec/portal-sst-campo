@@ -12,3 +12,4 @@ export class PhotoPreview {
   replace(blob){this.clear();this.url=blob?this.create(blob):null;return this.url;}
   clear(){if(this.url)this.revoke(this.url);this.url=null;}
 }
+
