@@ -1,4 +1,4 @@
-import {validateFieldEvent} from './field-event-schema.mjs';
+import {validateFieldEvent} from './field-event-schema.mjs?v=3307e8';
 export const FIELD_PRODUCTION_CATALOG=Object.freeze({client:'Cebrace',unit:'Cebrace Jacareí',locations:Object.freeze(['EQR3','LVT','Almoxarifado','Gulote','Outro']),stages:Object.freeze(['Chegada','Transporte','Preparação','Isolamento','Inspeção','Execução','Ajustes','Finalização','Limpeza','Liberação','Outro'])});
 export function validateProductionContext(event,{received=false}={}) {
   const c=event.context;
