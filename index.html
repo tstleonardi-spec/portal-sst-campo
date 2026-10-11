@@ -108,12 +108,17 @@
     <p>Registros deste aparelho e da sua conta. “Enviado” confirma preservação no Drive; não confirma importação no Portal.</p>
     <label for="day">Período</label>
     <select id="day"><option value="TODAY">Hoje</option><option value="RECENT">Recentes</option></select>
+    <div id="pending-section" class="pending-section" hidden aria-labelledby="pending-title">
+      <div class="section-heading"><div><span class="section-kicker">PENDÊNCIAS</span><h2 id="pending-title">Pendentes de confirmação</h2></div></div>
+      <p id="pending-summary" role="status"></p>
+      <ol id="pending-diary" class="queue-list"></ol>
+    </div>
     <ol id="diary" class="queue-list"><li>Entre para consultar seus registros.</li></ol>
     <p id="diary-status" role="status" class="feedback"></p>
   </section>
 
   <footer>Ambiente temporário OPERACIONAL. Sem internet, o envio fica indisponível. Use um aparelho protegido. Horários de São Paulo.</footer>
 </main>
-<script type="module" src="./prod-app.mjs?v=prod9ac"></script>
+<script type="module" src="./prod-app.mjs?v=receipt-auth1"></script>
 </body>
 </html>
